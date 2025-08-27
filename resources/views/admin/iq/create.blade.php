@@ -11,7 +11,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="siswa_id">Pilih Siswa</label>
                                 <select type="text" class="form-control" id="siswa_id" name="siswa_id" required>
@@ -22,25 +22,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="aspek">Pilih Aspek</label>
+                                <label for="aspek">Pilih Kategori</label>
                                 <select type="text" class="form-control" id="aspek" name="aspek" required>
-                                    <option value="" selected disabled>Select Aspek</option>
-                                    <option value="Verbal">Verbal</option>
-                                    <option value="Memori">Memori</option>
-                                    <option value="Visuospatial">Visuospatial</option>
-                                    <option value="Penalaran">Penalaran</option>
-                                    <option value="Seni">Seni</option>
+                                    <option value="" selected disabled>Select Kategori</option>
+                                    <option value="Sangat Rendah">Sangat Rendah</option>
+                                    <option value="Ambang batas">Ambang batas</option>
+                                    <option value="Di bawah rata-rata">Di bawah rata-rata</option>
+                                    <option value="Rata-Rata">Rata-Rata</option>
+                                    <option value="Di atas rata-rata">Di atas rata-rata</option>
+                                    <option value="Superior">Superior</option>
+                                    <option value="Jenius">Jenius</option>
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="nilai">Nilai</label>
-                                <input type="number" min="0" max="100" minlength="1" maxlength="3"
-                                    class="form-control" placeholder="Masukan Nilai" id="nilai" name="nilai"
-                                    required>
                             </div>
                         </div>
                         <div class="col-md-12">

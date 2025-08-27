@@ -42,28 +42,55 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($rekomendasi as $item)
+                                        @foreach ($rekomendasi->groupBy('user_id') as $userId => $items)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->user->name }}</td>
-                                                <td>{{ $item->user->nis }}</td>
-                                                <td>{{ $item->perkembangan->aspek }}</td>
-                                                <td>{{ $item->catatan }}</td>
-                                                <td>{{ Carbon\Carbon::parse($item->perkembangan->aspek_tanggal)->translatedFormat('F Y') }}
+                                                <td rowspan="{{ $items->count() }}">{{ $loop->iteration }}</td>
+                                                <td rowspan="{{ $items->count() }}">{{ $items->first()->user->name }}</td>
+                                                <td rowspan="{{ $items->count() }}">{{ $items->first()->user->nis }}</td>
+
+                                                <td>{{ $items->first()->perkembangan->aspek }}</td>
+                                                <td>{{ $items->first()->catatan }}</td>
+                                                <td>{{ Carbon\Carbon::parse($items->first()->perkembangan->aspek_tanggal)->translatedFormat('F Y') }}
                                                 </td>
                                                 <td>
                                                     <div class="btn-group-sm btn-group btn-block">
                                                         <button type="button" class="btn btn-warning" data-toggle="modal"
-                                                            data-target="#editRekomendasi{{ $item->id }}">Edit</button>
+                                                            data-target="#editRekomendasi{{ $items->first()->id }}">Edit</button>
                                                         <button type="button" class="btn btn-danger delete"
-                                                            url="{{ route('rekomendasi.delete', $item->id) }}"
-                                                            data-id="{{ $item->id }}">Delete</button>
+                                                            url="{{ route('rekomendasi.delete', $items->first()->id) }}"
+                                                            data-id="{{ $items->first()->id }}">Delete</button>
                                                     </div>
                                                 </td>
+                                                @include('admin.rekomendasi.update', [
+                                                    'item' => $items->first(),
+                                                ])
                                             </tr>
-                                            @include('admin.rekomendasi.update')
+
+                                            {{-- baris sisanya tanpa nama & nis --}}
+                                            @foreach ($items->skip(1) as $item)
+                                                <tr>
+                                                    <td>{{ $item->perkembangan->aspek }}</td>
+                                                    <td>{{ $item->catatan }}</td>
+                                                    <td>{{ Carbon\Carbon::parse($item->perkembangan->aspek_tanggal)->translatedFormat('F Y') }}
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group-sm btn-group btn-block">
+                                                            <button type="button" class="btn btn-warning"
+                                                                data-toggle="modal"
+                                                                data-target="#editRekomendasi{{ $item->id }}">Edit</button>
+                                                            <button type="button" class="btn btn-danger delete"
+                                                                url="{{ route('rekomendasi.delete', $item->id) }}"
+                                                                data-id="{{ $item->id }}">Delete</button>
+                                                        </div>
+                                                    </td>
+                                                    @include('admin.rekomendasi.update', [
+                                                        'item' => $item,
+                                                    ])
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     </tbody>
+
                                 </table>
                             </div>
                             <!-- /.card-body -->

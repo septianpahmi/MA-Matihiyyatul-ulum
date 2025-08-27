@@ -21,7 +21,7 @@ class PerkembanganController extends Controller
     public function detail($id)
     {
         $pageTitle = "Perkembangan";
-        $perkembangan = Perkembangan::with('siswa')
+        $perkembangan = Perkembangan::where('siswa_id', $id)->with('siswa')
             ->orderBy('created_at', 'desc')
             ->get()
             ->groupBy(function ($item) {

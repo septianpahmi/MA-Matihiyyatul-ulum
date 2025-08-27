@@ -9,7 +9,6 @@ class IqTest extends Model
     protected $fillable = [
         'siswa_id',
         'aspek',
-        'nilai',
         'catatan',
     ];
 

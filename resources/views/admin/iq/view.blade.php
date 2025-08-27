@@ -38,8 +38,7 @@
                                             <th>No. </th>
                                             <th>Nama Siswa</th>
                                             <th>NIS</th>
-                                            <th>Aspek</th>
-                                            <th>Nilai</th>
+                                            <th>Kategori</th>
                                             <th>Catatan</th>
                                             <th>Action</th>
                                         </tr>
@@ -51,7 +50,6 @@
                                                 <td>{{ $item->siswa->user->name }}</td>
                                                 <td>{{ $item->siswa->user->nis }}</td>
                                                 <td>{{ $item->aspek }}</td>
-                                                <td>{{ $item->nilai }}</td>
                                                 <td>{{ $item->catatan }}</td>
                                                 <td>
                                                     <div class="btn-group-sm btn-group btn-block">

@@ -44,27 +44,66 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($items as $i => $item)
-                                                <tr>
-                                                    <td>{{ $i + 1 }}</td>
-                                                    <td>{{ $item->siswa->user->name }}</td>
-                                                    <td>{{ $item->siswa->user->nis }}</td>
-                                                    <td>{{ $item->aspek }}</td>
-                                                    <td>{{ $item->nilai }}</td>
-                                                    <td>
-                                                        <div class="btn-group-sm btn-group btn-block">
-                                                            <button type="button" class="btn btn-primary"
-                                                                data-toggle="modal"
-                                                                data-target="#rekomenPerkembangan{{ $item->id }}">Rekomendasi</button>
-                                                            <button type="button" class="btn btn-warning"
-                                                                data-toggle="modal"
-                                                                data-target="#editPerkembangan{{ $item->id }}">Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                @include('admin.perkembangan.rekomendasi')
-                                                @include('admin.perkembangan.update')
+                                            @foreach ($perkembangan as $periode => $items)
+                                                @php $grouped = $items->groupBy('siswa.user.nis'); @endphp
+
+                                                @foreach ($grouped as $nis => $rows)
+                                                    <tr>
+                                                        <td rowspan="{{ count($rows) }}">{{ $loop->iteration }}</td>
+                                                        <td rowspan="{{ count($rows) }}">{{ $rows[0]->siswa->user->name }}
+                                                        </td>
+                                                        <td rowspan="{{ count($rows) }}">{{ $rows[0]->siswa->user->nis }}
+                                                        </td>
+
+                                                        {{-- aspek pertama --}}
+                                                        <td>{{ $rows[0]->aspek }}</td>
+                                                        <td>{{ $rows[0]->nilai }}</td>
+                                                        <td>
+                                                            <div class="btn-group-sm btn-group btn-block">
+                                                                <button type="button" class="btn btn-primary"
+                                                                    data-toggle="modal"
+                                                                    data-target="#rekomenPerkembangan{{ $rows[0]->id }}">Rekomendasi</button>
+                                                                <button type="button" class="btn btn-warning"
+                                                                    data-toggle="modal"
+                                                                    data-target="#editPerkembangan{{ $rows[0]->id }}">Edit</button>
+                                                            </div>
+                                                            {{-- modal untuk aspek pertama --}}
+                                                            @include('admin.perkembangan.rekomendasi', [
+                                                                'item' => $rows[0],
+                                                            ])
+                                                            @include('admin.perkembangan.update', [
+                                                                'item' => $rows[0],
+                                                            ])
+                                                        </td>
+                                                    </tr>
+
+                                                    {{-- aspek berikutnya --}}
+                                                    @foreach ($rows->skip(1) as $row)
+                                                        <tr>
+                                                            <td>{{ $row->aspek }}</td>
+                                                            <td>{{ $row->nilai }}</td>
+                                                            <td>
+                                                                <div class="btn-group-sm btn-group btn-block">
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-toggle="modal"
+                                                                        data-target="#rekomenPerkembangan{{ $row->id }}">Rekomendasi</button>
+                                                                    <button type="button" class="btn btn-warning"
+                                                                        data-toggle="modal"
+                                                                        data-target="#editPerkembangan{{ $row->id }}">Edit</button>
+                                                                </div>
+                                                                {{-- modal untuk aspek berikutnya --}}
+                                                                @include('admin.perkembangan.rekomendasi', [
+                                                                    'item' => $row,
+                                                                ])
+                                                                @include('admin.perkembangan.update', [
+                                                                    'item' => $row,
+                                                                ])
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endforeach
                                             @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>

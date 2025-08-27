@@ -40,7 +40,6 @@ class IqController extends Controller
         $iq = new IqTest;
         $iq->siswa_id = $siswa->id;
         $iq->aspek = $request->aspek;
-        $iq->nilai = $request->nilai;
         $iq->catatan = $request->catatan;
         $iq->save();
         return redirect()->route('testiq')->with('success', 'Data Test IQ berhasil disimpan.');
@@ -50,7 +49,7 @@ class IqController extends Controller
     {
         $iq = IqTest::find($id);
         $iq->update([
-            'nilai' => $request->nilai,
+            'aspek' => $request->aspek,
             'catatan' => $request->catatan,
         ]);
         return redirect()->route('testiq')->with('success', 'Data Test IQ berhasil diubah.');

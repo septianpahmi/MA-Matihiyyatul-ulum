@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('siswa_id');
             $table->string('aspek');
-            $table->string('nilai');
             $table->text('catatan');
             $table->timestamps();
             $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade');

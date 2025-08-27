@@ -15,10 +15,17 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="nilai">Nilai</label>
-                                    <input type="number" min="0" max="100" minlength="1" maxlength="3"
-                                        class="form-control" placeholder="Masukan Nilai" value="{{ $item->nilai }}"
-                                        id="nilai" name="nilai" required>
+                                    <label for="aspek">Pilih Kategori</label>
+                                    <select type="text" class="form-control" id="aspek" name="aspek" required>
+                                        <option value="" selected disabled>Select Kategori</option>
+                                        <option value="Sangat Rendah">Sangat Rendah</option>
+                                        <option value="Ambang batas">Ambang batas</option>
+                                        <option value="Di bawah rata-rata">Di bawah rata-rata</option>
+                                        <option value="Rata-Rata">Rata-Rata</option>
+                                        <option value="Di atas rata-rata">Di atas rata-rata</option>
+                                        <option value="Superior">Superior</option>
+                                        <option value="Jenius">Jenius</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-12">

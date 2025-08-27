@@ -53,8 +53,15 @@ Route::middleware('auth')->group(function () {
     //laporan
     Route::get('/dashboard/laporan', [LaporanController::class, 'index'])->name('laporan');
     Route::GET('/dashboard/laporan/create', [LaporanController::class, 'create'])->name('laporan.create');
+
+    Route::get('/dashboard/laporan/all', [LaporanController::class, 'indexAll'])->name('laporan-all');
+    Route::get('/dashboard/laporan/get', [LaporanController::class, 'createGet'])->name('laporan-get');
+
     Route::get('/dashboard/laporan-iq', [LaporanController::class, 'indexIQ'])->name('laporanIq');
     Route::GET('/dashboard/laporan-iq/create', [LaporanController::class, 'createIQ'])->name('laporanIq.create');
+
+    Route::get('/dashboard/laporan-iq/all', [LaporanController::class, 'IQall'])->name('laporanIq-all');
+    Route::GET('/dashboard/laporan-iq/get/all', [LaporanController::class, 'getIQ'])->name('laporanIq.get');
 });
 Route::middleware('auth')->group(function () {
     //dashboard

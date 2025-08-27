@@ -23,65 +23,59 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="invoice p-3 mb-3">
-                            <!-- title row -->
+
                             <div class="row">
-                                <div class="col-12">
-                                    <h4 class="text-center">DAFTAR PROGRAM TEST IQ RA MATHIYYATUL ULUM
-                                    </h4>
+                                <div class="col-12 mt-4">
+                                    <h4 class="text-center">DAFTAR PROGRAM TEST IQ RA MATHIYYATUL ULUM</h4>
                                 </div>
-                                <!-- /.col -->
                             </div>
-                            <!-- info row -->
+
                             <div class="row invoice-info">
-                                <div class="col-sm-4 invoice-col">
+                                <div class="col-sm-2 invoice-col">
                                     <address>
-                                        Nama Siswa<br>
-                                        NOMOR INDUK<br>
-                                        Kelas<br>
                                         Tahun Pelajaran<br>
                                     </address>
                                 </div>
-                                <!-- /.col -->
+
                                 <div class="col-sm-4 invoice-col">
                                     <address>
-                                        <strong>{{ optional($iq[0]->siswa->user)->name }}</strong><br>
-                                        <strong>{{ optional($iq[0]->siswa->user)->nis }}</strong><br>
-                                        <strong>{{ optional($iq[0]->siswa)->kelas }}</strong><br>
                                         <strong>
-                                            {{ optional($iq[0])->created_at ? Carbon\Carbon::parse($iq[0]->created_at)->format('Y') : '-' }}
-                                            -
-                                            {{ optional($iq[0])->created_at ? Carbon\Carbon::parse($iq[0]->created_at)->addYear()->format('Y') : '-' }}
+                                            : {{ $periode }}
                                         </strong>
                                     </address>
                                 </div>
-
                             </div>
-                            <!-- /.row -->
                             <div class="row">
                                 <div class="col-12 table-responsive">
                                     <table class="table table-bordered">
                                         <thead>
-                                            <tr class="text-center items-center">
+                                            <tr class="text-center">
                                                 <th>No.</th>
+                                                <th>Nama</th>
+                                                <th>NIS</th>
+                                                <th>Kelas</th>
                                                 <th>Kategori</th>
                                                 <th>Catatan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($iq as $item)
-                                                <tr class="text-center">
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $item->aspek }}</td>
-                                                    <td>{{ $item->catatan }}</td>
-                                                </tr>
+                                            @php $no = 1; @endphp
+                                            @foreach ($iq as $siswaId => $tests)
+                                                @foreach ($tests as $item)
+                                                    <tr class="text-center">
+                                                        <td>{{ $no++ }}</td>
+                                                        <td>{{ $item->siswa->user->name }}</td>
+                                                        <td>{{ $item->siswa->user->nis }}</td>
+                                                        <td>{{ $item->siswa->kelas }}</td>
+                                                        <td>{{ $item->aspek }}</td>
+                                                        <td>{{ $item->catatan }}</td>
+                                                    </tr>
+                                                @endforeach
                                             @endforeach
                                         </tbody>
-
                                     </table>
                                 </div>
-                                <!-- /.col -->
                             </div>
-                            <!-- /.row -->
 
                             <!-- this row will not appear when printing -->
                             <div class="row no-print">

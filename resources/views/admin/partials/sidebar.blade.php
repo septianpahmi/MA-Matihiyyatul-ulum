@@ -54,23 +54,56 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-header">LAPORAN</li>
                     <li class="nav-item">
-                        <a href="{{ route('laporan') }}"
-                            class="nav-link{{ request()->routeIs(['laporan']) ? ' active' : '' }}">
+                        <a href="#" class="nav-link{{ request()->routeIs(['laporan']) ? ' active' : '' }}">
                             <i class="nav-icon fas fa-folder-open"></i>
                             <p>
-                                Laporan Perekembangan
+                                Perekembangan
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('laporan') }}"
+                                    class="nav-link{{ request()->routeIs('laporan') ? ' active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Per Siswa</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('laporan-all') }}"
+                                    class="nav-link{{ request()->routeIs('laporan-all') ? ' active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Keseluruhan</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('laporanIq') }}"
-                            class="nav-link{{ request()->routeIs(['laporanIq']) ? ' active' : '' }}">
+                        <a href="#" class="nav-link{{ request()->routeIs(['laporanIq']) ? ' active' : '' }}">
                             <i class="nav-icon fas fa-folder-open"></i>
                             <p>
                                 Laporan IQ
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('laporanIq') }}"
+                                    class="nav-link{{ request()->routeIs('laporanIq') ? ' active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Per Siswa</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('laporanIq-all') }}"
+                                    class="nav-link{{ request()->routeIs('laporanIq-all') ? ' active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Keseluruhan</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endif
                 @if (Auth::user()->role_id == 2)
